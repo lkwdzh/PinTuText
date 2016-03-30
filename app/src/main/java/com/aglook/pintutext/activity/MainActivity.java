@@ -25,6 +25,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private List<Bitmap>mPicList=new ArrayList<>();
     private TextView mTvPuzzleMainTypeSelected;
     private LayoutInflater mLayoutInflater;
+    private View mPopupView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         //显示Type
         mTvPuzzleMainTypeSelected = (TextView) findViewById(R.id.tv_puzzle_main_type_selected);
         mLayoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        mPopupView = mLayoutInflater.inflate(R.layout.xpuzzle_main_type_selected, null);
 
     }
 
