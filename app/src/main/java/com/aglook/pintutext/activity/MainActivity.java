@@ -16,12 +16,14 @@ import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.aglook.pintutext.R;
+import com.aglook.pintutext.adapter.GridPicListAdapter;
 import com.aglook.pintutext.util.ScreenUtil;
 
 import java.io.File;
@@ -53,6 +55,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private PopupWindow mPopupWindow;
     //本地相册，相机选择
     private String[] mCustomItems=new String[]{"本地图册","相机拍照"};
+    private TextView mTvType5;
+    private TextView mTvType6;
+    private TextView mTvType7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +67,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         TEMP_IMAGE_PATH = Environment.getExternalStorageDirectory().getPath() + "/temp.png";
         initViews();
 
-
+        // 数据适配器
+        mGvPicList.setAdapter(new GridPicListAdapter(
+                MainActivity.this, mPicList));
         mGvPicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -150,7 +157,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void popupShow(View view) {
         int density = (int) ScreenUtil.getDeviceDensity(this);
         //显示popupwindow
-        mPopupWindow = new PopupWindow(mPopupView, 200 * density, 50 * density);
+        mPopupWindow = new PopupWindow(mPopupView, ViewGroup.LayoutParams.WRAP_CONTENT, 50 * density);
         mPopupWindow.setFocusable(true);
         mPopupWindow.setOutsideTouchable(true);
         //透明背景
@@ -192,11 +199,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mTvType2 = (TextView) mPopupView.findViewById(R.id.tv_main_type_2);
         mTvType3 = (TextView) mPopupView.findViewById(R.id.tv_main_type_3);
         mTvType4 = (TextView) mPopupView.findViewById(R.id.tv_main_type_4);
+        mTvType5 = (TextView) mPopupView.findViewById(R.id.tv_main_type_5);
+        mTvType6 = (TextView) mPopupView.findViewById(R.id.tv_main_type_6);
+        mTvType7 = (TextView) mPopupView.findViewById(R.id.tv_main_type_7);
         // 监听事件
         mTvType2.setOnClickListener(this);
         mTvType3.setOnClickListener(this);
         mTvType4.setOnClickListener(this);
-
+        mTvType5.setOnClickListener(this);
+        mTvType6.setOnClickListener(this);
+        mTvType7.setOnClickListener(this);
     }
 
     /**
@@ -216,6 +228,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.tv_main_type_4:
                 mType = 4;
                 mTvPuzzleMainTypeSelected.setText("4 X 4");
+                break;
+            case R.id.tv_main_type_5:
+                mType = 5;
+                mTvPuzzleMainTypeSelected.setText("5 X 5");
+                break;
+            case R.id.tv_main_type_6:
+                mType = 6;
+                mTvPuzzleMainTypeSelected.setText("6 X 6");
+                break;
+            case R.id.tv_main_type_7:
+                mType = 7;
+                mTvPuzzleMainTypeSelected.setText("7 X 7");
                 break;
         }
         mPopupWindow.dismiss();

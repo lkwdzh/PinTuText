@@ -91,7 +91,7 @@ public class GameUtil {
     public static boolean isSuccess() {
         for (ItemBean tempBean :
                 GameUtil.mItemBeans) {
-            if (tempBean.getmBitmapId() != 0 && (tempBean.getmBitmapId() == tempBean.getmBitmapId())) {
+            if (tempBean.getmBitmapId() != 0 && (tempBean.getmItemId() == tempBean.getmBitmapId())) {
                 continue;
             } else if (tempBean.getmBitmapId() == 0 && tempBean.getmItemId() == SecondActivity.TYPE * SecondActivity.TYPE) {
                 continue;
